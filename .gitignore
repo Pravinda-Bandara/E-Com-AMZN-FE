@@ -1,0 +1,92 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+dist-ssr/
+build/
+.out/
+.cache/
+.next/
+
+# Static files generated
+*.local
+*.env.local
+
+# Test output
+/coverage/
+/jest-test-results.json
+/nyc_output/
+
+# AWS-related files
+.aws-sam/
+.serverless/
+/cdk.out
+*.pem
+cloudformation.json
+stack-outputs.json
+
+# CI/CD generated files
+/tmp
+/.terraform
+/.nyc_output
+/.pytest_cache
+/test-results.xml
+/.aws
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript specific
+*.tsbuildinfo
+
+# macOS specific
+.DS_Store
+
+# Linux specific
+*.swp
+*.swo
+
+# Parcel, Webpack, Rollup
+/.parcel-cache
+/.webpack/
+/webpack.config.js
+/rollup.config.js
+
+# Optional lock files
+/pnpm-lock.yaml
+/yarn.lock
+/package-lock.json
+
+# GitHub Actions
+!.github/workflows
+.github/actions/secrets
+
+# Misc
+Thumbs.db
