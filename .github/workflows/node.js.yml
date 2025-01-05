@@ -24,6 +24,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
+    - name: Set environment variables
+      run: |
+        echo "NODE_ENV=production" >> $GITHUB_ENV
+        echo "VITE_REACT_APP_BASE_URL_PROD=https://your-production-api-url.com" >> $GITHUB_ENV
+
     - name: Install dependencies
       run: npm ci
 
