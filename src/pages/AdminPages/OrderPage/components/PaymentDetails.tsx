@@ -2,9 +2,9 @@ import { Card } from "react-bootstrap";
 import MessageBox from "../../../../components/MessageBox.tsx";
 
 interface PaymentDetailsProps {
-    paymentMethod: string;
-    isPaid: boolean;
-    paidAt?: string;
+    paymentMethod: any;
+    isPaid: any;
+    paidAt?: any;
 }
 
 export function PaymentDetails({ paymentMethod, isPaid, paidAt }: PaymentDetailsProps) {

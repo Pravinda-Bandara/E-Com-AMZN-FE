@@ -18,7 +18,7 @@ export default function ProfilePage() {
                         {/* Profile Image */}
                         <div className="profile-image-container flex justify-center items-center">
                             <img
-                                src={userInfo?.imageUrl || 'https://static.vecteezy.com/system/resources/thumbnails/019/879/186/small_2x/user-icon-on-transparent-background-free-png.png'}  // Default avatar if no image is available
+                                src={ 'https://static.vecteezy.com/system/resources/thumbnails/019/879/186/small_2x/user-icon-on-transparent-background-free-png.png'}  // Default avatar if no image is available
                                 alt="Profile"
                                 className="rounded-full w-40 h-40 object-cover"
                             />

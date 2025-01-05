@@ -1,16 +1,16 @@
 import { Card, ListGroup, Row, Col, Button } from "react-bootstrap";
 
 interface OrderSummaryProps {
-    itemsPrice: number;
-    shippingPrice: number;
-    taxPrice: number;
-    totalPrice: number;
-    isPaid: boolean;
-    isDelivered: boolean;
+    itemsPrice: any;
+    shippingPrice: any;
+    taxPrice: any;
+    totalPrice: any;
+    isPaid: any;
+    isDelivered: any;
     userInfo: any;
     onPay: () => void;
     onDeliver: () => void;
-    loadingDeliver: boolean;
+    loadingDeliver: any;
 }
 
 export function OrderSummary({

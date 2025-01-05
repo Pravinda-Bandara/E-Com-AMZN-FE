@@ -49,11 +49,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <p className="text-lg">
                             <strong>Description:</strong> {product.description}
                         </p>
-                        {product.isFeatured && (
-                            <p className="text-lg mt-2 text-success">
-                                <strong>Featured:</strong> Yes
-                            </p>
-                        )}
                     </div>
                 </div>
             </div>

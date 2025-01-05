@@ -25,8 +25,8 @@ export function ProductListPage1() {
   const navigate = useNavigate();
 
   // State for min and max price range (set initial to null for no price filter)
-  const [minPrice, setMinPrice] = useState<number | null>(null);
-  const [maxPrice, setMaxPrice] = useState<number | null>(null);
+  const [minPrice, setMinPrice] = useState<number>(1);
+  const [maxPrice, setMaxPrice] = useState<number>(1);
 
   // Fetch products with filters
   const { data, isLoading, error } = useGetProductsQuery({
@@ -59,8 +59,8 @@ export function ProductListPage1() {
   }) => {
     setSort(filters.sort);
     setBrand(filters.brand);
-    setMinPrice(filters.minPrice);
-    setMaxPrice(filters.maxPrice);
+    setMinPrice(filters.minPrice ?? 0);
+setMaxPrice(filters.maxPrice ?? 0);
     setPage(1); // Reset to first page when filters are applied
   };
 

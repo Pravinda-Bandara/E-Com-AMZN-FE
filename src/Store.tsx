@@ -32,7 +32,7 @@ type Action =
     | { type: "CART_ADD_ITEM"; payload: CartItem }
     | { type: "CART_REMOVE_ITEM"; payload: CartItem }
     | { type: "USER_SIGNIN"; payload: UserInfo }
-    | { type: "USER_SIGNOUT"; payload: UserInfo }
+    | { type: "USER_SIGNOUT";}
     | { type: 'SAVE_SHIPPING_ADDRESS'; payload: ShippingAddress }
     | { type: 'SAVE_PAYMENT_METHOD'; payload: string }
     | { type: 'CART_CLEAR' };

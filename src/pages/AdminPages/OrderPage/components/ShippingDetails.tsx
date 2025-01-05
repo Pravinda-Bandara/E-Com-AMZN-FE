@@ -3,8 +3,8 @@ import MessageBox from "../../../../components/MessageBox.tsx";
 
 interface ShippingDetailsProps {
     shippingAddress: any;
-    isDelivered: boolean;
-    deliveredAt?: string;
+    isDelivered: any;
+    deliveredAt?: any;
 }
 
 export function ShippingDetails({ shippingAddress, isDelivered, deliveredAt }: ShippingDetailsProps) {

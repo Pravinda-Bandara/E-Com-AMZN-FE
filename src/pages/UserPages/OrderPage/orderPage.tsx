@@ -13,6 +13,7 @@ import { ShippingDetails } from "./components/ShippingDetails";
 import { PaymentDetails } from "./components/PaymentDetails";
 import { OrderItems } from "./components/OrderItems";
 import { OrderSummary } from "./components/OrderSummury.tsx";
+import { ApiError } from "../../../types/ApiError.ts";
 
 export default function OrderPage() {
     const { state } = useContext(Store);
@@ -33,7 +34,7 @@ export default function OrderPage() {
     }
 
     if (error) {
-        return <MessageBox variant="danger">{getError(error)}</MessageBox>;
+        return <MessageBox variant="danger">{getError(error as unknown as ApiError)}</MessageBox>;
     }
 
     if (!order) {

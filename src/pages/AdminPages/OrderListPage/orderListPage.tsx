@@ -32,10 +32,10 @@ export default function OrderListPage() {
     const handleConfirmAction = async () => {
         try {
             if (actionType === "delete") {
-                await deleteOrderMutation(currentOrderId);
+                await deleteOrderMutation(currentOrderId || '');
                 toast.success("Order deleted successfully");
             } else {
-                await deliverOrderMutation(currentOrderId);
+                await deliverOrderMutation(currentOrderId || '');
                 toast.success("Order delivered successfully");
             }
             refetch();
@@ -57,7 +57,7 @@ export default function OrderListPage() {
                 <MessageBox variant="danger">{getError(error as unknown as ApiError)}</MessageBox>
             ) : (
                 <OrderTable
-                    orders={orders}
+                orders={orders || []}
                     handleDeleteConfirmation={handleDeleteConfirmation}
                     handleDeliverConfirmation={handleDeliverConfirmation}
                 />

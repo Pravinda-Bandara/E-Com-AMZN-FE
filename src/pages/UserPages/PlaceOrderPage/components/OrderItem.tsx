@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+interface CartItem {
+    _id: string | undefined;  // Ensure this is a non-optional string
+    name: string;
+    image: any;
+    slug: string;
+    quantity: number;
+    price: number;
+}
+
 interface OrderItemsProps {
-    cartItems: {
-        _id: string;
-        name: string;
-        image: string;
-        slug: string;
-        quantity: number;
-        price: number;
-    }[];
+    cartItems: CartItem[];  // cartItems should be an array of CartItem
 }
 
 export function OrderItems({ cartItems }: OrderItemsProps) {
@@ -40,14 +42,11 @@ export function OrderItems({ cartItems }: OrderItemsProps) {
                                 {item.name}
                             </Link>
                         </div>
-                        {/* Quantity and Price Section */}
                         <div className="flex space-x-8 w-60 justify-between">
-                            {/* Quantity Section */}
                             <div className="flex items-center space-x-2">
                                 <div className="text-sm font-semibold text-gray-700">Quantity:</div>
                                 <div className="text-sm font-semibold text-gray-700">{item.quantity}</div>
                             </div>
-                            {/* Price Section */}
                             <div className="flex items-center space-x-2">
                                 <div className="text-sm font-semibold text-gray-700">Price:</div>
                                 <div className="text-sm font-semibold text-gray-700">${item.price.toFixed(2)}</div>

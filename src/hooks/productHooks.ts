@@ -7,8 +7,8 @@ type GetProductsQueryOptions = {
     searchQuery?: string;
     category?: string;
     brand?: string;
-    minPrice?: number;
-    maxPrice?: number;
+    minPrice?: any;
+    maxPrice?: any;
     rating?: number;
     sort?: string;
     page?: number;
@@ -127,7 +127,6 @@ export const useGetBrandsQuery = (category: string, searchQuery: string, minPric
             const response = await apiClient.get<string[]>(`/api/products/brands?${params.toString()}`);
             return response.data;
         },
-        keepPreviousData: true, // Maintain old data during fetching
     });
 
 

@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 import { ShippingDetails } from "./components/ShippingDetails";
 import { PaymentDetails } from "./components/PaymentDetails";
 import { OrderItems } from "./components/OrderItems";
-import { OrderSummary } from "./components/OrderSummury.tsx";
+import { OrderSummary } from "./components/OrderSummury.tsx";  // Fixed typo here
+import { ApiError } from "../../../types/ApiError.ts";
 
 export default function OrderPage() {
     const { state } = useContext(Store);
@@ -24,22 +25,30 @@ export default function OrderPage() {
     const { mutateAsync: deliverOrder, isPending: loadingDeliver } = useDeliverOrderMutation();
 
     const confirmHandler = async () => {
-        await payOrder({ orderId: orderId! });
-        refetch();
-        toast.success("Order is paid");
+        if (orderId) {
+            await payOrder({ orderId });
+            refetch();
+            toast.success("Order is paid");
+        }
     };
 
     const deliverHandler = async () => {
-        await deliverOrder(orderId!);
-        refetch();
-        toast.success("Order is delivered");
+        if (orderId) {
+            await deliverOrder(orderId);
+            refetch();
+            toast.success("Order is delivered");
+        }
     };
 
-    return isLoading ? (
-        <LoadingBox />
-    ) : error ? (
-        <MessageBox variant="danger">{getError(error)}</MessageBox>
-    ) : (
+    if (isLoading) return <LoadingBox />;
+    
+    if (error) {
+        return (
+            <MessageBox variant="danger">{getError(error as unknown as ApiError )}</MessageBox>
+        );
+    }
+
+    return (
         <div>
             <Helmet>
                 <title>Order {orderId}</title>
@@ -48,25 +57,25 @@ export default function OrderPage() {
             <Row>
                 <Col md={8}>
                     <ShippingDetails 
-                        shippingAddress={order?.shippingAddress}
-                        isDelivered={order.isDelivered}
-                        deliveredAt={order.deliveredAt}
+                        shippingAddress={order?.shippingAddress} 
+                        isDelivered={order?.isDelivered} 
+                        deliveredAt={order?.deliveredAt} 
                     />
                     <PaymentDetails 
-                        paymentMethod={order.paymentMethod}
-                        isPaid={order.isPaid}
-                        paidAt={order.paidAt}
+                        paymentMethod={order?.paymentMethod} 
+                        isPaid={order?.isPaid} 
+                        paidAt={order?.paidAt} 
                     />
-                    <OrderItems items={order.orderItems} />
+                    <OrderItems items={order?.orderItems || []} />
                 </Col>
                 <Col md={4}>
                     <OrderSummary
-                        itemsPrice={order.itemsPrice}
-                        shippingPrice={order.shippingPrice}
-                        taxPrice={order.taxPrice}
-                        totalPrice={order.totalPrice}
-                        isPaid={order.isPaid}
-                        isDelivered={order.isDelivered}
+                        itemsPrice={order?.itemsPrice}
+                        shippingPrice={order?.shippingPrice}
+                        taxPrice={order?.taxPrice}
+                        totalPrice={order?.totalPrice}
+                        isPaid={order?.isPaid}
+                        isDelivered={order?.isDelivered}
                         userInfo={userInfo}
                         onPay={confirmHandler}
                         onDeliver={deliverHandler}

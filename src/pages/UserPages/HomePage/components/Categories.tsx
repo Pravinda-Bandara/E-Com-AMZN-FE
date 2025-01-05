@@ -11,7 +11,7 @@ export function Categories({ category, setCategory, categories }: CategoriesProp
         <Nav
             className="mb-3 p-3 rounded bg-light text-dark"
             activeKey={category}
-            onSelect={(selectedCategory) => setCategory(selectedCategory)}
+            onSelect={(selectedCategory) => setCategory(selectedCategory || "")} 
         >
             <Nav.Item>
                 <Nav.Link

@@ -7,10 +7,10 @@ interface FiltersProps {
     brand: string[];
     setBrand: React.Dispatch<React.SetStateAction<string[]>>;
     brands: string[];
-    minPrice: number | null;
-    setMinPrice: React.Dispatch<React.SetStateAction<number | null>>;
-    maxPrice: number | null;
-    setMaxPrice: React.Dispatch<React.SetStateAction<number | null>>;
+    minPrice: any;
+    setMinPrice: any;
+    maxPrice: any;
+    setMaxPrice: any;
     onApplyFilters: (filters: {
         sort: string;
         brand: string[];
