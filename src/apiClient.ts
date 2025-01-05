@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const apiBaseUrl_prod = import.meta.env.VITE_REACT_APP_BASE_URL_PROD;
+const apiBaseUrl = import.meta.env.VITE_REACT_APP_BASE_URL_PROD;
 const apiClient = axios.create({
     baseURL:
-        process.env.NODE_ENV === 'development' ? 'http://localhost:5050/' : '/',
+        process.env.NODE_ENV === 'development' ? apiBaseUrl : apiBaseUrl_prod,
     headers: {
         'Content-type': 'application/json',
     },

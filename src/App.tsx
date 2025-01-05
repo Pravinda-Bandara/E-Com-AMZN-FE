@@ -36,7 +36,8 @@ function App() {
 
     // Apply shake class if there are items in the cart and animation is triggered
     const shakeClass = shake ? "cart-shake" : "";
-    console.log(userInfo)
+    
+
 
     return (
         <div className="d-flex flex-column vh-100">
