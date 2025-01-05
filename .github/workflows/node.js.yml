@@ -32,5 +32,8 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Ensure TypeScript is installed
+      run: npm install typescript --save-dev
+
     - name: Build the project
       run: npm run build --if-present
