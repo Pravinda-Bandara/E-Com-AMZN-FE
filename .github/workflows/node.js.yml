@@ -34,3 +34,13 @@ jobs:
 
     - name: Build the project
       run: npm run build  # Build the project
+
+    # Set correct permissions for the built files
+    - name: Set permissions for built files
+      run: |
+        sudo chown -R www-data:www-data /home/ubuntu/actions-runner-web/_work/E-Com-AMZN-FE/E-Com-AMZN-FE/dist
+        sudo chmod -R 755 /home/ubuntu/actions-runner-web/_work/E-Com-AMZN-FE/E-Com-AMZN-FE/dist
+
+    - name: Restart Nginx
+      run: sudo systemctl restart nginx  # Restart Nginx to apply the new build
+
