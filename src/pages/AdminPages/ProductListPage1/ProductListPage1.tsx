@@ -22,11 +22,9 @@ export function ProductListPage1() {
   const [sort, setSort] = useState<string>('latest');
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(8);
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const navigate = useNavigate();
-
-  // State for min and max price range (set initial to null for no price filter)
-  const [minPrice, setMinPrice] = useState<number>(1);
-  const [maxPrice, setMaxPrice] = useState<number>(1);
 
   // Fetch products with filters
   const { data, isLoading, error } = useGetProductsQuery({
@@ -41,16 +39,15 @@ export function ProductListPage1() {
   });
 
   // Fetch dynamic categories and brands
-  const { data: categories, isLoading: loadingCategories } = useGetCategoriesQuery(brand.join(','));
-  const { data: brands, isLoading: loadingBrands } = useGetBrandsQuery(category, name, minPrice, maxPrice);
+  const { data: categories } = useGetCategoriesQuery(brand.join(','));
+  const { data: brands } = useGetBrandsQuery(category, name, minPrice, maxPrice);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    setPage(1); // Reset to first page
-    setName(searchInput); // Trigger API request
+    setPage(1);
+    setName(searchInput);
   };
 
-  // Apply filters when the user clicks the "Apply Filters" button
   const handleApplyFilters = (filters: {
     sort: string;
     brand: string[];
@@ -59,31 +56,44 @@ export function ProductListPage1() {
   }) => {
     setSort(filters.sort);
     setBrand(filters.brand);
-    setMinPrice(filters.minPrice ?? 0);
-setMaxPrice(filters.maxPrice ?? 0);
-    setPage(1); // Reset to first page when filters are applied
+    setMinPrice(filters.minPrice ?? null);
+    setMaxPrice(filters.maxPrice ?? null);
+    setPage(1);
+  };
+
+  const handleReset = () => {
+    setSearchInput('');
+    setName('');
+    setCategory('');
+    setBrand([]);
+    setSort('latest');
+    setMinPrice(null);
+    setMaxPrice(null);
+    setPage(1);
   };
 
   return (
     <div>
       <Helmet>
-        <title>Amazona</title>
+        <title>Amazona - Product List</title>
       </Helmet>
-      <div className=" flex justify-between w-9/12">
-      <h1 className="h3">Products</h1>
-      <Button className="m-2" onClick={() => navigate(`create`)}>Create New Product +</Button>
+      <div className="flex justify-between w-9/12">
+        <h1 className="h3">Products</h1>
+        <Button className="m-2" onClick={() => navigate('create')}>
+          Create New Product +
+        </Button>
+        <Button variant="secondary" className="m-2" onClick={handleReset}>
+          Reset Filters
+        </Button>
       </div>
       <Row className="mb-3 flex justify-center">
-        {/* Main Content - Product List */}
         <Col md={9}>
           <Categories category={category} setCategory={setCategory} categories={categories || []} />
-
           <SearchSection
-            name={searchInput} // Bind input state
-            setName={setSearchInput} // Update only the input state
-            handleSearch={handleSearch} // Update the query state on form submit
+            name={searchInput}
+            setName={setSearchInput}
+            handleSearch={handleSearch}
           />
-          
           {isLoading ? (
             <LoadingBox />
           ) : error ? (
@@ -92,8 +102,6 @@ setMaxPrice(filters.maxPrice ?? 0);
             <ProductList products={data!.products} page={page} pages={data!.pages} setPage={setPage} />
           )}
         </Col>
-
-        {/* Sidebar - Filters (Now on the Right) */}
         <Col md={3} className="p-3 bg-light text-dark rounded-2">
           <Filters
             sort={sort}
@@ -105,7 +113,7 @@ setMaxPrice(filters.maxPrice ?? 0);
             setMinPrice={setMinPrice}
             maxPrice={maxPrice}
             setMaxPrice={setMaxPrice}
-            onApplyFilters={handleApplyFilters} // Pass the function to apply filters
+            onApplyFilters={handleApplyFilters}
           />
         </Col>
       </Row>
