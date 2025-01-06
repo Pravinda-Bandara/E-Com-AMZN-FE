@@ -17,7 +17,7 @@ export function OrderItems({ items }: OrderItemsProps) {
                                 {/* Image and Product Name */}
                                 <Col md={6} className="d-flex align-items-center space-x-4">
                                     <img
-                                        src={`../${item.image}`}
+                                        src={`${item.image}`}
                                         alt={item.name}
                                         className="img-fluid rounded-lg w-24 h-24 object-cover"
                                     />
